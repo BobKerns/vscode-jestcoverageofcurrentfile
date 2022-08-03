@@ -3,21 +3,28 @@
   "displayName": "JestCoverageOfCurrentFile",
   "description": "run jest for current file and get coverage info",
   "version": "0.0.1",
+  "keywords": [
+    "jest",
+    "coverage"
+  ],
+  "publisher": "findxc",
   "engines": {
     "vscode": "^1.69.0"
   },
   "categories": [
-    "Other"
+    "Testing"
   ],
   "activationEvents": [
-    "onCommand:jestcoverageofcurrentfile.helloWorld"
+    "onCommand:jestcoverageofcurrentfile.run"
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "keybindings": [
       {
-        "command": "jestcoverageofcurrentfile.helloWorld",
-        "title": "Hello World"
+        "command": "jestcoverageofcurrentfile.run",
+        "key": "ctrl+k j",
+        "mac": "cmd+k j",
+        "when": "resourceFilename =~ /\\.(spec|test)\\.[tj]sx?$/"
       }
     ]
   },

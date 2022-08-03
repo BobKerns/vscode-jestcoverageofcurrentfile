@@ -1,26 +1,31 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "jestcoverageofcurrentfile" is now active!');
+	const disposable = vscode.commands.registerCommand('jestcoverageofcurrentfile.run', () => {
+		const document = vscode.window.activeTextEditor?.document;
+		if(!document) {
+			return;
+		}
+		const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+		if(!workspaceFolder) {
+			return;
+		}
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('jestcoverageofcurrentfile.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from JestCoverageOfCurrentFile!');
+		const testFile = document.fileName.replace(`${workspaceFolder.uri.fsPath}/`, '');
+		// transform xxx.spec.ts or xxx.test.tsx to xxx.ts*
+		// xxx.ts* can match xxx.ts and xxx.tsx
+		const collectFrom = testFile.replace(/\.(spec|test)(\.[tj]s)x?$/, '$2*');
+
+		let terminal = vscode.window.terminals.find(item => item.name === 'jest-coverage' && !item.exitStatus);
+		if(!terminal) {
+			terminal = vscode.window.createTerminal('jest-coverage');
+		}
+
+		terminal.show();
+		terminal.sendText(`npm test -- "${testFile}" "--watchAll=false" "--coverage" "--collectCoverageFrom=${collectFrom}"`);
 	});
 
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
