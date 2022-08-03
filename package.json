@@ -3,10 +3,15 @@
   "displayName": "JestCoverageOfCurrentFile",
   "description": "run jest for current file and get coverage info",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/findxc/vscode-jestcoverageofcurrentfile.git"
+  },
   "keywords": [
     "jest",
     "coverage"
   ],
+  "license": "MIT",
   "publisher": "findxc",
   "engines": {
     "vscode": "^1.69.0"
