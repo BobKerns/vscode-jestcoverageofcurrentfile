@@ -1,7 +1,9 @@
+.husky/**
 .vscode/**
 .vscode-test/**
 src/**
 .gitignore
+.prettierrc.json
 .yarnrc
 vsc-extension-quickstart.md
 **/tsconfig.json
