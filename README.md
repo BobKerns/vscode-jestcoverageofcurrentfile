@@ -6,4 +6,4 @@
 2. press `cmd + k` first (in windows is `ctrl + k`), and then press `j`
 3. it will open a terminal and run `npm test -- "src/pages/no-match/index.test.js" "--watchAll=false" "--coverage" "--collectCoverageFrom=src/pages/no-match/index.js*"`
 
-Yes, the main purpose is to save the time you manully typing the whole command.
+![demo](./demo.gif)
