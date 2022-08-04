@@ -28,10 +28,20 @@ export function activate(context: vscode.ExtensionContext) {
         terminal = vscode.window.createTerminal('jest-coverage')
       }
 
-      terminal.show()
-      terminal.sendText(
-        `npm test -- "${testFile}" "--watchAll=false" "--coverage" "--collectCoverageFrom=${collectFrom}"`
+      const { jestCommand, runCommand } = vscode.workspace.getConfiguration(
+        'jestcoverageofcurrentfile'
       )
+
+      const command = runCommand
+        ? runCommand
+            .replace('$testFile', testFile)
+            .replace('$collectFrom', collectFrom)
+        : `${
+            jestCommand || 'npm test'
+          } -- "${testFile}" "--watchAll=false" "--coverage" "--collectCoverageFrom=${collectFrom}"`
+
+      terminal.show()
+      terminal.sendText(command)
     }
   )
 
