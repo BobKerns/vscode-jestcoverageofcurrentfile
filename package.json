@@ -31,6 +31,23 @@
         "mac": "cmd+k j",
         "when": "resourceFilename =~ /\\.(spec|test)\\.[tj]sx?$/"
       }
+    ],
+    "configuration": [
+      {
+        "title": "JestCoverageOfCurrentFile",
+        "properties": {
+          "jestcoverageofcurrentfile.jestCommand": {
+            "type": "string",
+            "default": "",
+            "description": "The default is \"npm test\". If in your package.json scripts, \"jest\" but not \"test\" means jest, set \"npm run jest\" here."
+          },
+          "jestcoverageofcurrentfile.runCommand": {
+            "type": "string",
+            "default": "",
+            "description": "Custom the command to run. The $testFile and $collectFrom in command will be corretly replaced. For example, npm test -- \"$testFile\" \"--coverage\" \"--collectCoverageFrom=$collectFrom\""
+          }
+        }
+      }
     ]
   },
   "scripts": {
