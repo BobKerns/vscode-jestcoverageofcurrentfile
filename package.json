@@ -2,7 +2,7 @@
   "name": "jestcoverageofcurrentfile",
   "displayName": "JestCoverageOfCurrentFile",
   "description": "run jest for current file and get coverage info",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/findxc/vscode-jestcoverageofcurrentfile.git"
