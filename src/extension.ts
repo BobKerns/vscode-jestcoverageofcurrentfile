@@ -21,12 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
       // xxx.ts* can match xxx.ts and xxx.tsx
       const collectFrom = testFile.replace(/\.(spec|test)(\.[tj]s)x?$/, '$2*')
 
-      let terminal = vscode.window.terminals.find(
-        item => item.name === 'jest-coverage' && !item.exitStatus
-      )
-      if (!terminal) {
-        terminal = vscode.window.createTerminal('jest-coverage')
-      }
+      const terminal =
+        vscode.window.terminals.find(item => item.name === 'jest-coverage') ||
+        vscode.window.createTerminal('jest-coverage')
 
       const { jestCommand, runCommand } = vscode.workspace.getConfiguration(
         'jestcoverageofcurrentfile'
