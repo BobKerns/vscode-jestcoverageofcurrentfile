@@ -2,7 +2,7 @@
   "name": "jestcoverageofcurrentfile",
   "displayName": "JestCoverageOfCurrentFile",
   "description": "run jest for current file and get coverage info",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/findxc/vscode-jestcoverageofcurrentfile.git"
@@ -29,7 +29,7 @@
         "command": "jestcoverageofcurrentfile.run",
         "key": "ctrl+k j",
         "mac": "cmd+k j",
-        "when": "resourceFilename =~ /\\.(spec|test)\\.[tj]sx?$/"
+        "when": "resourceFilename =~ /\\.(?:spec|test)\\.[tj]sx?$|\\/(?:spec|test|_spec_|_test_|__spec__|__test__)\\/.*\\.[tj]sx?$\/"
       }
     ],
     "configuration": [
@@ -44,7 +44,7 @@
           "jestcoverageofcurrentfile.runCommand": {
             "type": "string",
             "default": "",
-            "description": "Custom the command to run. The $testFile and $collectFrom in command will be corretly replaced. For example, npm test -- \"$testFile\" \"--coverage\" \"--collectCoverageFrom=$collectFrom\""
+            "description": "Custom the command to run. The $testFile and $collectFrom in command will be correctly replaced. For example, npm test -- \"$testFile\" \"--coverage\" \"--collectCoverageFrom=$collectFrom\""
           }
         }
       }
