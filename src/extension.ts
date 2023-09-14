@@ -18,9 +18,14 @@ export function activate(context: vscode.ExtensionContext) {
         ''
       )
       // transform xxx.spec.ts or xxx.test.tsx to xxx.ts
-      // Or __test__/xxx.[jt]sx? to xxx.[jt]s
+      // Or __test__/xxx.[jt]sx? to xxx.[jt]s. In this case, xxx can include subdirectories.
+      // test/, _test_/, __test__/, spec/, _spec_/, and __spec__/ are all recognized.
       // xxx.ts* can match xxx.ts and xxx.tsx
-      const collectFrom = testFile.replace(/(\/[^\/]+)\.(?:spec|test)(\.[tj]s)x?$|\/_{0,2}(?:spec|test)_{0,2}(\/.+)(\.[jt]s)x?$/, '$1$2$3$4*')
+      const collectFrom =
+        testFile.replace(
+          /(\/[^\/]+)\.(?:spec|test)(\.[tj]s)x?$|\/(?:spec|test|_spec_|_test_|__spec__|__test__)(\/.+)(\.[jt]s)x?$/,
+          '$1$2$3$4*' // $1$2 for the first case, $3$4 for the second case.
+        )
 
       const terminal =
         vscode.window.terminals.find(item => item.name === 'jest-coverage') ||
