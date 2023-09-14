@@ -17,9 +17,10 @@ export function activate(context: vscode.ExtensionContext) {
         `${workspaceFolder.uri.fsPath}/`,
         ''
       )
-      // transform xxx.spec.ts or xxx.test.tsx to xxx.ts*
+      // transform xxx.spec.ts or xxx.test.tsx to xxx.ts
+      // Or __test__/xxx.[jt]sx? to xxx.[jt]s
       // xxx.ts* can match xxx.ts and xxx.tsx
-      const collectFrom = testFile.replace(/\.(spec|test)(\.[tj]s)x?$/, '$2*')
+      const collectFrom = testFile.replace(/(\/[^\/]+)\.(?:spec|test)(\.[tj]s)x?$|\/_{0,2}(?:spec|test)_{0,2}(\/.+)(\.[jt]s)x?$/, '$1$2$3$4*')
 
       const terminal =
         vscode.window.terminals.find(item => item.name === 'jest-coverage') ||
